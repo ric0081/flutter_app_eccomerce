@@ -40,8 +40,6 @@ class _LoginPageState extends State<LoginPage> {
   final AuthService _auth = AuthService();
 
   bool _isLoading = false;
-
-
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light.copyWith(statusBarColor: Colors.transparent));
