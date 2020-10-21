@@ -5,15 +5,21 @@ import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_eccomerce/pages/saldos.dart';
+import 'package:flutter_app_eccomerce/pages/widgetPruebaVida.dart';
 import 'package:intl/intl.dart';
 import '../pages/home.dart';
 import '../models/category_model.dart';
 import 'package:flutter_app_eccomerce/Login.dart';
+import 'package:camera/camera.dart';
+import 'package:flutter_app_eccomerce/pages/widgetPruebaVidaLogin.dart';
+
 
 
 class AddIncome extends StatefulWidget {
   //String incomeAmount;
-  AddIncome(this.record);
+  List<CameraDescription> cameras;
+  AddIncome(this.record,this.cameras);
+
   Record record;
 
   @override
@@ -36,6 +42,15 @@ class _AddIncomeState extends State<AddIncome> {
   TextEditingController saldoController = new TextEditingController(text:"");
   TextEditingController montoTransfercontroller =  new TextEditingController(text:"");
   Record record;
+
+  CameraController controller;
+  bool _cameraInitialized = false;
+  Future<void> _initializeControllerFuture;
+  bool showFab = true;
+  bool _loading = true;
+  CameraImage _savedImage;
+
+
   @override
   void initState() {
     super.initState();
@@ -43,12 +58,17 @@ class _AddIncomeState extends State<AddIncome> {
     category = "";
     getIncomeCategories();
     record= widget.record;
+
+    // Para visualizar la salida actual de la cámara, es necesario
+    // crear un CameraController
+
   }
 
   @override
   void dispose() {
     // Clean up the controller when the widget is disposed.
     saldoController.dispose();
+    controller?.dispose();
     super.dispose();
   }
 
@@ -296,7 +316,7 @@ class _AddIncomeState extends State<AddIncome> {
               ),
 
               Divider(),
-              buttonSection(this.record),
+              buttonSection(this.record,this.controller),
               Divider(),
 
               Expanded(
@@ -349,10 +369,11 @@ class _AddIncomeState extends State<AddIncome> {
 
   }
 
+  final _formKey = GlobalKey<FormState>();
 
   //final DocumentReference reference;
 
-  Container buttonSection(Record record) {
+  Container buttonSection(Record record, CameraController controller) {
     print(record.toString());
     Record record2;
     ///record2 = Record.fromSnapshot(data);
@@ -367,6 +388,25 @@ class _AddIncomeState extends State<AddIncome> {
       margin: EdgeInsets.only(top: 15.0),
       child: RaisedButton(
         onPressed:() {
+
+
+          //_showAlertDialog();
+
+         // Navigator.push(context, MaterialPageRoute(builder: (context)=>widgetPruebaVidaLogin()));
+
+
+          Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (BuildContext context) => widgetPruebaVidaLogin(
+              camerasdescripcion:widget.cameras,
+              record:record,
+              montoTransfer:  montoTransfercontroller.text,
+              cuentaDestino: cuentaDestinoController.text
+          )),(Route<dynamic> route) => false);
+
+
+
+
+
+/*
           print("Actualizar data");
           record.reference.updateData(<String, dynamic>{
             'saldo': (double.parse(record.saldo)  - double.parse(montoTransfercontroller.text)).toString()
@@ -412,34 +452,7 @@ class _AddIncomeState extends State<AddIncome> {
 
 
           Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (BuildContext context) => HomePage()),(Route<dynamic> route) => false);
-
-         // Navigator.push(context, MaterialPageRoute(builder: (context) => AddSaldos(record)));
-
-/*
-            Firestore.instance.collection('cuentas').document(cuentaDestinoController.text).updateData(<String, dynamic>{
-            'saldo': (double.parse(record.saldo) - double.parse(saldoController.text)).toString()
-            });
-*/
-          /*record2.reference.updateData(<String, dynamic>{
-            'saldo': (double.parse(record.saldo) + 5).toString()
-          });*/
-            //Firestore.instance.runTransaction((transaction) async {
-            //final freshSnapshot = await transaction.get(record.reference);
-            //final fresh = Record.fromSnapshot(freshSnapshot);
-            //await transaction.update(record.reference, {'saldo': (double.parse(fresh.saldo) + 5).toString()});
-            //Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (BuildContext context) => LoginPage()), (Route<dynamic> route) => false);
-
-          //});
-
-
-
-
-
-          //cuentaOrigenController.text == "" || cuentaDestinoController.text == "" ? null : () {
-          /*setState(() {
-            _isLoading = true;
-          });*/
-          //signIn(emailController.text, passwordController.text);
+          */
             },
             elevation: 0.0,
             color: Colors.green,
@@ -448,6 +461,33 @@ class _AddIncomeState extends State<AddIncome> {
       ),
     );
   }
+
+  void _showAlertDialog() {
+    showDialog(
+        context: context,
+        builder: (buildcontext) {
+          return AlertDialog(
+            title: Text("Prueba de Vida"),
+            content: Text("prueba"),
+            actions: <Widget>[
+              RaisedButton(
+                child: Text("Cerrar", style: TextStyle(color: Colors.white),),
+                onPressed: (){ Navigator.of(context).pop(); },
+              )
+            ],
+          );
+        }
+    );
+  }
+
+
+
+
+
+
+
+
+
 
 
     Widget _displaySelectedCategory() {

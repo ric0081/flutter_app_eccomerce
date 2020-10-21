@@ -7,8 +7,8 @@ class addBackRequest{
 
   String operationId;
   String userName;
-  String analyzeOcr;
-  String analyzeAnomalies;
+  bool analyzeOcr;
+  bool analyzeAnomalies;
   String file;
 
 

@@ -9,8 +9,8 @@ addFrontRequest _$OperationRequestFromJson(Map<String, dynamic> json) {
   return addFrontRequest(
       operationId: json['operationId'] as String,
       userName: json['userName'] as String,
-      analyzeOcr: json['analyzeOcr'] as String,
-      analyzeAnomalies: json['analyzeAnomalies'] as String,
+      analyzeOcr: json['analyzeOcr'] as bool,
+      analyzeAnomalies: json['analyzeAnomalies'] as bool,
       file: json['file'] as String,
  /*   createDateTime: json['createDateTime'] == null
         ? null
@@ -22,7 +22,7 @@ addFrontRequest _$OperationRequestFromJson(Map<String, dynamic> json) {
  );
 }
 
-Map<String, dynamic> _$addFrontToJson(addFrontRequest instance) => <String, dynamic>{
+Map<String, dynamic> _$addFrontRequestToJson(addFrontRequest instance) => <String, dynamic>{
   'operationId': instance.operationId,
   'userName': instance.userName,
   'analyzeOcr': instance.analyzeOcr,

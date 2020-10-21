@@ -1,6 +1,7 @@
 import 'package:animations/animations.dart';
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app_eccomerce/createUser.dart';
+import 'file:///D:/VU%20Security/ProjectKruger/flutter_app_eccomerce/lib/pages/createUserFront.dart';
 import 'package:flutter_app_eccomerce/pages/account_page.dart';
 import 'package:flutter_app_eccomerce/pages/home.dart';
 import 'package:flutter_app_eccomerce/pages/income.dart';
@@ -18,10 +19,12 @@ import 'gallery/letter_spacing.dart';
 
 GetIt locator = GetIt.instance;
 
+
 void main(){
   // GetIt.instance.registerLazySingleton<VuOperations>(VuOperations());
   //GetIt.I.registerLazySingleton(() => VuOperations());
   locator.registerLazySingleton(() => VuOperations());
+
   runApp(MateriaApp());
 } //=> runApp(MateriaApp());
 
@@ -56,8 +59,8 @@ class MateriaApp extends StatelessWidget {
                             return LoginPage();
                           }
                       },
-                    '/second': (context) => CreateUser(),
-                    '/account_page':(context)=>AccountPage(),
+                //    '/second': (context) => CreateUser(),
+                 //   '/account_page':(context)=>AccountPage(),
                     //                    '/add'
                     },
                   )

@@ -7,14 +7,14 @@ part of 'addFrontResponse.dart';
 
 addFrontResponse _$addFrontResponseFromJson(Map<String, dynamic> json) {
   return addFrontResponse(
-    code: json['code'] as int,
-    message: json['message'] as String,
-    detectedCountry: json['detectedCountry'] as String,
-    addBackRequired: json['addBackRequired'] as bool,
-    addDocumentPictureRequired: json['addDocumentPictureRequired'] as bool,
-    documentPictureDetected: json['documentPictureDetected'] as bool,
-    containsBarcode: json['containsBarcode'] as bool,
-    barcodeDetected: json['barcodeDetected'] as bool,
+    code: json['code']== null ? null: json['code'] as int,
+    message: json['message'] == null ? null:json['message'] as String,
+    detectedCountry: json['detectedCountry'] == null ? null: json['detectedCountry'] as String,
+    addBackRequired: json['addBackRequired'] == null ? null: json['addBackRequired'] as bool,
+    addDocumentPictureRequired: json['addDocumentPictureRequired'] == null ? null: json['addDocumentPictureRequired'] as bool,
+    documentPictureDetected: json['documentPictureDetected'] == null ? null:  json['documentPictureDetected'] as bool,
+    containsBarcode: json['containsBarcode'] == null ? null:  json['containsBarcode']as bool,
+    barcodeDetected: json['barcodeDetected'] == null ? null:  json['barcodeDetected'] as bool,
 
 
  /*   createDateTime: json['createDateTime'] == null

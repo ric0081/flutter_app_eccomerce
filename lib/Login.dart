@@ -1,12 +1,15 @@
 import 'dart:convert';
 //import 'dart:html';
 
+import 'package:camera/camera.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app_eccomerce/models/BaseAuth.dart';
+import 'package:flutter_app_eccomerce/pages/account_page.dart';
 import 'package:flutter_app_eccomerce/pages/loginState.dart';
+import 'package:flutter_app_eccomerce/pages/pruebaVida.dart';
 import 'package:flutter_app_eccomerce/services/VuOperations.dart';
 import 'package:get_it/get_it.dart';
 //import 'package:flutter_app_eccomerce/models/AuthService.dart';
@@ -16,7 +19,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_app_eccomerce/utils/constants.dart';
 
-import 'createUser.dart';
+import 'pages/createUserFront.dart';
 import 'models/AuthService.dart';
 import 'package:flutter_app_eccomerce/gallery/gallery_options.dart';
 
@@ -34,15 +37,31 @@ Future<bool> saveNamePreference(String id) async{
   return pref.commit();
 }
 */
-
 class _LoginPageState extends State<LoginPage> {
 
-  final AuthService _auth = AuthService();
+  List<CameraDescription> cameras;
 
-  bool _isLoading = false;
+  Future<void> camarasASY() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    cameras = await availableCameras();
+    // runApp(new MyApp());
+  }
+
+  final AuthService _auth = AuthService();
+  @override
+  void initState() {
+    /*pONER EN HORIZONTL EL WIDGET*/
+//    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitDown,DeviceOrientation.portraitUp]);
+    camarasASY;
+    super.initState();
+  }
+
+      bool _isLoading = false;
   @override
   Widget build(BuildContext context) {
+
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light.copyWith(statusBarColor: Colors.transparent));
+    camarasASY();
     return
         Scaffold(
              // appBar: AppBar(automaticallyImplyLeading: false),
@@ -148,12 +167,12 @@ class _LoginPageState extends State<LoginPage> {
   Widget _buildSignupBtn() {
     return GestureDetector(
       onTap: () {
-
-/*          Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(builder: (BuildContext context) => createUser()),
-                  (Route<dynamic> route) => false),*/
+        /*Funcion:::*/
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>CreateUserFront(camerasdescripcion: cameras),));
+         // Navigator.push(context, MaterialPageRoute(builder: (context)=>PruebaVida(camerasdescripcion: cameras),));
         print('Sign Up Button Pressed');
-        Navigator.pushNamed(context, '/account_page');
+
+
         //Navigator.pushNamed(context, '/second');
 
 

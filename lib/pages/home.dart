@@ -18,6 +18,14 @@ import 'package:flutter_app_eccomerce/componets/HorizontalListView.dart';
 import 'package:flutter_app_eccomerce/componets/Productos.dart';
 
 import 'loginState.dart';
+import 'package:camera/camera.dart';
+
+List<CameraDescription> cameras;
+
+Future<void> iniccamara() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  cameras = await availableCameras();
+}
 
 
 
@@ -33,7 +41,7 @@ class  _HomePageState extends State<HomePage>{
     void initState(){
     print("llege");
     super.initState();
-
+    iniccamara();
   }
   SharedPreferences sharedPreferences;
   AlertDialogs _alertDialogs;
@@ -540,7 +548,7 @@ class  _HomePageState extends State<HomePage>{
 
   void renderizar(Choice choice, Record campos) {
     if (choice.title == "Transferir") {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => AddIncome(campos)));
+      Navigator.push(context, MaterialPageRoute(builder: (context) => AddIncome(campos,cameras)));
     } else if (choice.title == "Saldo") {
       Navigator.push(context, MaterialPageRoute(builder: (context) => AddSaldos(campos)));
     } else if (choice.title == "Pagar") {

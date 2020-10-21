@@ -6,36 +6,54 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app_eccomerce/models/rest/addFrontRequest.dart';
 import 'package:flutter_app_eccomerce/models/rest/addFrontResponse.dart';
+import 'package:flutter_app_eccomerce/pages/widgetCamaraFront.dart';
 import 'package:flutter_app_eccomerce/services/VuOperations.dart';
 import 'package:get_ip/get_ip.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:get_it/get_it.dart';
 
-import 'models/rest/newOperationRequest.dart';
-import 'models/rest/newOperationResponse.dart';
+import 'package:flutter_app_eccomerce/models/rest/newOperationRequest.dart';
+import 'package:flutter_app_eccomerce/models/rest/newOperationResponse.dart';
+import 'package:camera/camera.dart';
+
 
 BuildContext globalContext; // Declare global variable to store context from StatelessWidget
 
-class CreateUser extends StatefulWidget {
+class CreateUserFront extends StatefulWidget {
 
-//  final BuildContext context;
+  final List<CameraDescription> camerasdescripcion;
+ // CreateUserFront({this.camerasdescripcion});
+  const CreateUserFront({
+    Key key,
+    @required this.camerasdescripcion,
+  }) : super(key: key);
+
+  //  final BuildContext context;
   @override
-  _CreateUserState createState() => _CreateUserState();
+  _CreateUserFrontState createState() => _CreateUserFrontState();
 
 }
 
-class _CreateUserState extends State<CreateUser> {
+class _CreateUserFrontState extends State<CreateUserFront> {
   File _imageFile;
   File _imageFile2;
   File _selfi;
   String img64;
+
   VuOperations get operationService => GetIt.I<VuOperations>();
   newOperationResponse opeResp;
   addFrontResponse  addFrontResp;
 
   @override
+  void dispose() {
+    SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.portraitDown, DeviceOrientation.portraitUp]);
+  }
+    @override
   void initState(){
-    super.initState();
+    WidgetsFlutterBinding.ensureInitialized();   SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft]).then((_) {
+      super.initState();
+    });
   }
   @override
   Widget build(BuildContext context) {
@@ -45,7 +63,7 @@ class _CreateUserState extends State<CreateUser> {
     print("entro al crear");
     return Scaffold(
             appBar: AppBar(
-                title: Text('Ingresar sus credenciales'),
+                title: Text('Registro'),
               centerTitle: false,
               elevation: 1.0,
               backgroundColor: Colors.orange,
@@ -53,15 +71,46 @@ class _CreateUserState extends State<CreateUser> {
             body:Center(
                  child:Container (
                     child:Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            //_decideImageView(),
+                              Center(
+                                child: Text(
+                                    'Captura de frente del documento',
+                                    textDirection: TextDirection.ltr,
+                                    style: TextStyle(fontWeight: FontWeight.bold),
+                                  )
+                                ),
+
+                            new Image.asset(
+                              'images/vu/front_help.gif',
+                              width:480.0,
+                              height: 250.0,
+                            ),
+
+                            Center(
+                                child: Text(
+                                  'Presta atencion a las indicaciones',
+                                  textDirection: TextDirection.ltr,
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                )
+
+
+                            ),
                             RaisedButton(
-                              child: Text('Tomar Foto al frente del Documento Identidad',),
-                              onPressed :() {
-                                _openCamera(context);
+                              child: Text('Continuar',),
+                              onPressed :() async {
+                                //widgetCamara(cameras:widget.cameras);
+
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=>widgetCamaraFront(
+                                    camerasdescripcion:
+                                widget.camerasdescripcion)));
+
+
+                               // _openCamera(context);
                               },
                             ),
+
+                            /*
                             Container (
                                 child: _imageFile==null? Text("Sin imagenes"): Image.file(_imageFile,width: 250,height: 250,),
                                 ),
@@ -159,19 +208,17 @@ class _CreateUserState extends State<CreateUser> {
 
 
                             ),
-
-
-      ],
-                ),
-
-
-
+                            */
+                          ],
+                    ),
 
               ),
               ),
 
           );
 }
+
+
 
  Widget _decideImageView(){
     if(_imageFile== null){

@@ -7,8 +7,8 @@ class addFrontRequest{
 
   String operationId;
   String userName;
-  String analyzeOcr;
-  String analyzeAnomalies;
+  bool analyzeOcr;
+  bool analyzeAnomalies;
   String file;
 
 
@@ -29,5 +29,5 @@ class addFrontRequest{
       }
       );
 */
-  Map<String, dynamic> toJson() =>_$addFrontToJson(this);
+  Map<String, dynamic> toJson() =>_$addFrontRequestToJson(this);
  }

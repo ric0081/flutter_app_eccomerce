@@ -31,22 +31,30 @@ dependencies:
   cupertino_icons: ^0.1.3
   cloud_firestore: ^0.13.7
   firebase_core: ^0.4.5
-
   firebase_auth: ^0.13.0
+
   image_picker: ^0.6.7+4
   provider: ^2.0.1
   http: ^0.12.2
   json_serializable: ^3.3.0
   get_it: ^3.0.3
   get_ip: ^0.4.0
+ # camera: ^0.5.8+5
+  camera_camera: ^1.0.30
+  ffi: ^ 0.1.3
+  image: ^ 2.1.12
+  png_hide: ^0.0.2
+  native_device_orientation: ^0.3.0
+
   #####Galery
   google_fonts: ^1.0.0
   animations: ^1.1.2
-#  flutter_launcher_icons: ^0.7.5
+
+
 #flutter_icons:
 #  #  image_path: "assets/images/icon-128x128.png"
-#  image_path_android: "images/kmaleon-transp-1.png"
-#  image_path_ios: "images/kmaleon-transp-1.png"
+#  image_path_android: "images/bank/Qu.jpg"
+#  image_path_ios: "images/bank/Qu.jpg"
 #  android: true # can specify file name here e.g. "ic_launcher"
 #  ios: true # can specify file name here e.g. "My-Launcher-Icon"
 #  adaptive_icon_background: "images/kmaleon-transp-1.png" # only available for Android 8.0 devices and above
@@ -55,9 +63,14 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: ^0.7.5
   #http: any
   shared_preferences: any
 
+flutter_icons:
+  image_path: "images/bank/Qu.jpg"
+  android: true
+  ios: true
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
@@ -84,6 +97,10 @@ flutter:
     - images/w3.jpeg
     - images/w4.jpeg
     - images/bank/login.png
+    - images/vu/front_help.gif
+    - images/vu/back_help.gif
+    - images/vu/selfie_help.gif
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

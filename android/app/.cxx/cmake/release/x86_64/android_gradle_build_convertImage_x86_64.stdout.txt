@@ -1,0 +1,1 @@
+[1/1] Linking C shared library "D:\VU Security\ProjectKruger\flutter_app_eccomerce\build\app\intermediates\cmake\release\obj\x86_64\libconvertImage.so"

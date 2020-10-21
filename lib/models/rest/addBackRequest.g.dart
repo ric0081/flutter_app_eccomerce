@@ -9,8 +9,8 @@ addBackRequest _$BackRequestFromJson(Map<String, dynamic> json) {
   return addBackRequest(
       operationId: json['operationId'] as String,
       userName: json['userName'] as String,
-      analyzeOcr: json['analyzeOcr'] as String,
-      analyzeAnomalies: json['analyzeAnomalies'] as String,
+      analyzeOcr: json['analyzeOcr'] as bool,
+      analyzeAnomalies: json['analyzeAnomalies'] as bool,
       file: json['file'] as String,
  /*   createDateTime: json['createDateTime'] == null
         ? null

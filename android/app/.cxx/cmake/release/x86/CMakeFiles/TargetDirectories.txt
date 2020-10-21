@@ -1,0 +1,3 @@
+D:/VU Security/ProjectKruger/flutter_app_eccomerce/android/app/.cxx/cmake/release/x86/CMakeFiles/rebuild_cache.dir
+D:/VU Security/ProjectKruger/flutter_app_eccomerce/android/app/.cxx/cmake/release/x86/CMakeFiles/convertImage.dir
+D:/VU Security/ProjectKruger/flutter_app_eccomerce/android/app/.cxx/cmake/release/x86/CMakeFiles/edit_cache.dir

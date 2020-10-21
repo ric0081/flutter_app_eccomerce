@@ -1,0 +1,70 @@
+{
+  "variant": {
+    "module": {
+      "rootBuildGradleFolder": "D:\\VU Security\\ProjectKruger\\flutter_app_eccomerce\\android",
+      "sdkFolder": "C:\\Users\\ricar\\Android\\SDK",
+      "isNativeCompilerSettingsCacheEnabled": false,
+      "isBuildOnlyTargetAbiEnabled": true,
+      "splitsAbiFilterSet": [],
+      "intermediatesFolder": "D:\\VU Security\\ProjectKruger\\flutter_app_eccomerce\\build\\app\\intermediates",
+      "gradleModulePathName": ":app",
+      "moduleRootFolder": "D:\\VU Security\\ProjectKruger\\flutter_app_eccomerce\\android\\app",
+      "makeFile": "D:\\VU Security\\ProjectKruger\\flutter_app_eccomerce\\android\\CMakeLists.txt",
+      "buildSystem": "CMAKE",
+      "compilerSettingsCacheFolder": "D:\\VU Security\\ProjectKruger\\flutter_app_eccomerce\\android\\.cxx",
+      "cxxFolder": "D:\\VU Security\\ProjectKruger\\flutter_app_eccomerce\\android\\app\\.cxx",
+      "ndkFolder": "C:\\Users\\ricar\\Android\\SDK\\ndk\\21.3.6528147",
+      "ndkVersion": "21.3.6528147",
+      "ndkSupportedAbiList": [
+        "ARMEABI_V7A",
+        "ARM64_V8A",
+        "X86",
+        "X86_64"
+      ],
+      "ndkDefaultAbiList": [
+        "ARMEABI_V7A",
+        "ARM64_V8A",
+        "X86",
+        "X86_64"
+      ],
+      "cmakeToolchainFile": "."
+    },
+    "buildSystemArgumentList": [],
+    "cFlagList": [],
+    "cppFlagsList": [],
+    "variantName": "release",
+    "soFolder": "D:\\VU Security\\ProjectKruger\\flutter_app_eccomerce\\build\\app\\intermediates\\cmake\\release\\lib",
+    "objFolder": "D:\\VU Security\\ProjectKruger\\flutter_app_eccomerce\\build\\app\\intermediates\\cmake\\release\\obj",
+    "jsonFolder": "D:\\VU Security\\ProjectKruger\\flutter_app_eccomerce\\android\\app\\.cxx\\cmake\\release",
+    "gradleBuildOutputFolder": "D:\\VU Security\\ProjectKruger\\flutter_app_eccomerce\\android\\app\\.cxx\\cxx\\release",
+    "isDebuggableEnabled": false,
+    "validAbiList": [
+      "ARMEABI_V7A",
+      "ARM64_V8A",
+      "X86",
+      "X86_64"
+    ],
+    "buildTargetSet": []
+  },
+  "abi": "X86",
+  "abiPlatformVersion": 21,
+  "cxxBuildFolder": "D:\\VU Security\\ProjectKruger\\flutter_app_eccomerce\\android\\app\\.cxx\\cmake\\release\\x86",
+  "jsonFile": "D:\\VU Security\\ProjectKruger\\flutter_app_eccomerce\\android\\app\\.cxx\\cmake\\release\\x86\\android_gradle_build.json",
+  "gradleBuildOutputFolder": "D:\\VU Security\\ProjectKruger\\flutter_app_eccomerce\\android\\app\\.cxx\\cxx\\release\\x86",
+  "objFolder": "D:\\VU Security\\ProjectKruger\\flutter_app_eccomerce\\build\\app\\intermediates\\cmake\\release\\obj\\x86",
+  "buildCommandFile": "D:\\VU Security\\ProjectKruger\\flutter_app_eccomerce\\android\\app\\.cxx\\cmake\\release\\x86\\build_command.txt",
+  "buildOutputFile": "D:\\VU Security\\ProjectKruger\\flutter_app_eccomerce\\android\\app\\.cxx\\cmake\\release\\x86\\build_output.txt",
+  "modelOutputFile": "D:\\VU Security\\ProjectKruger\\flutter_app_eccomerce\\android\\app\\.cxx\\cmake\\release\\x86\\build_model.json",
+  "cmake": {
+    "cmakeListsWrapperFile": "D:\\VU Security\\ProjectKruger\\flutter_app_eccomerce\\android\\app\\.cxx\\cxx\\release\\x86\\CMakeLists.txt",
+    "toolchainWrapperFile": "D:\\VU Security\\ProjectKruger\\flutter_app_eccomerce\\android\\app\\.cxx\\cxx\\release\\x86\\android_gradle_build.toolchain.cmake",
+    "buildGenerationStateFile": "D:\\VU Security\\ProjectKruger\\flutter_app_eccomerce\\android\\app\\.cxx\\cxx\\release\\x86\\build_generation_state.json",
+    "cacheKeyFile": "D:\\VU Security\\ProjectKruger\\flutter_app_eccomerce\\android\\app\\.cxx\\cxx\\release\\x86\\compiler_cache_key.json",
+    "compilerCacheUseFile": "D:\\VU Security\\ProjectKruger\\flutter_app_eccomerce\\android\\app\\.cxx\\cxx\\release\\x86\\compiler_cache_use.json",
+    "compilerCacheWriteFile": "D:\\VU Security\\ProjectKruger\\flutter_app_eccomerce\\android\\app\\.cxx\\cxx\\release\\x86\\compiler_cache_write.json",
+    "toolchainSettingsFromCacheFile": "D:\\VU Security\\ProjectKruger\\flutter_app_eccomerce\\android\\app\\.cxx\\cxx\\release\\x86\\compiler_settings_cache.cmake",
+    "cmakeWrappingBaseFolder": "."
+  },
+  "jsonGenerationLoggingRecordFile": "D:\\VU Security\\ProjectKruger\\flutter_app_eccomerce\\android\\app\\.cxx\\cmake\\release\\x86\\json_generation_record.json",
+  "compileCommandsJsonFile": "D:\\VU Security\\ProjectKruger\\flutter_app_eccomerce\\android\\app\\.cxx\\cmake\\release\\x86\\compile_commands.json"
+}
