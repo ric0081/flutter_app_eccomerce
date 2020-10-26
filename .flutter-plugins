@@ -1,5 +1,5 @@
 # This is a generated file; do not edit or check into version control.
-camera=C:\\Flutter\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\camera-0.5.8+9\\
+camera=C:\\Flutter\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\camera-0.5.8+11\\
 cloud_firestore=C:\\Flutter\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\cloud_firestore-0.13.7\\
 cloud_firestore_web=C:\\Flutter\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\cloud_firestore_web-0.1.1+2\\
 firebase_auth=C:\\Flutter\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\firebase_auth-0.13.1+1\\
@@ -9,7 +9,7 @@ flutter_plugin_android_lifecycle=C:\\Flutter\\flutter\\.pub-cache\\hosted\\pub.d
 get_ip=C:\\Flutter\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\get_ip-0.4.0\\
 image_picker=C:\\Flutter\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\image_picker-0.6.7+12\\
 native_device_orientation=C:\\Flutter\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\native_device_orientation-0.3.0\\
-path_provider=C:\\Flutter\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\path_provider-1.6.21\\
+path_provider=C:\\Flutter\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\path_provider-1.6.22\\
 path_provider_linux=C:\\Flutter\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\path_provider_linux-0.0.1+2\\
 path_provider_macos=C:\\Flutter\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\path_provider_macos-0.0.4+4\\
 path_provider_windows=C:\\Flutter\\flutter\\.pub-cache\\hosted\\pub.dartlang.org\\path_provider_windows-0.0.4+1\\

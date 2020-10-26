@@ -21,6 +21,7 @@ import 'dart:io';
 
 import 'package:path/path.dart' show join;
 import 'package:path_provider/path_provider.dart';
+import 'package:progress_dialog/progress_dialog.dart';
 import '../Login.dart';
 import 'createUserBack.dart';
 import 'image_converter.dart';
@@ -330,6 +331,31 @@ class DisplayPictureScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+
+    ProgressDialog pr;
+    bool _progressBarActive = true;
+    // Custom body test
+    pr = ProgressDialog(
+      context,
+      type: ProgressDialogType.Download,
+      textDirection: TextDirection.rtl,
+      isDismissible: true,
+    );
+    pr.style(
+      message:'Espera un momento mientras procesamos tu informacion',
+      borderRadius: 10.0,
+      backgroundColor: Colors.white,
+      elevation: 10.0,
+      insetAnimCurve: Curves.easeInOut,
+      progress: 0.0,
+      progressWidgetAlignment: Alignment.center,
+      maxProgress: 100.0,
+      progressTextStyle: TextStyle(color: Colors.orange, fontSize: 13.0, fontWeight: FontWeight.w400),
+      messageTextStyle: TextStyle(color: Colors.orange, fontSize: 19.0, fontWeight: FontWeight.w600),
+    );
+
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Confirma enviar esta foto VU?'),
@@ -356,6 +382,11 @@ class DisplayPictureScreen extends StatelessWidget {
           onPressed: () async {
             // Toma la foto en un bloque de try / catch. Si algo sale mal,
 
+          String usuario="pin09";
+
+            await pr.show();
+
+
             String fotofrontal=_obtenerBase64(imagePath);
             /* Logica de VU**/
             String _ip = '192.168.0.255';
@@ -374,7 +405,7 @@ class DisplayPictureScreen extends StatelessWidget {
 
             final reqOpe = Register(
               operationId: operationId.toString(),
-              userName: "operatorKruger",
+              userName: usuario,
               selfieList: self,
             );
             final resultOperacion = await operationService.register(reqOpe)
@@ -396,7 +427,7 @@ class DisplayPictureScreen extends StatelessWidget {
             /*Creaccion de New Operacion...................*/
             final reqOpeend = endOperationRequest(
               operationId: operationId.toString(),
-                userName: "operatorKruger",
+                userName: usuario,
             );
 
 
@@ -416,10 +447,10 @@ class DisplayPictureScreen extends StatelessWidget {
             );
             print("-----Se creo Nueva Operacion-------");
 
-
+            pr.hide().whenComplete((){
             /*Creaccion de New Front...................*/
                      Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginPage()));
-
+            });
           }),
     );
   }

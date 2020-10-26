@@ -12,6 +12,7 @@ import 'package:flutter_app_eccomerce/models/rest/addFrontResponse.dart';
 import 'package:flutter_app_eccomerce/pages/widgetCamaraBack.dart';
 import 'package:flutter_app_eccomerce/services/VuOperations.dart';
 import 'package:get_it/get_it.dart';
+import 'package:progress_dialog/progress_dialog.dart';
 
 import 'dart:io';
 
@@ -329,6 +330,28 @@ class DisplayPictureScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ProgressDialog pr;
+    bool _progressBarActive = true;
+    // Custom body test
+    pr = ProgressDialog(
+      context,
+      type: ProgressDialogType.Download,
+      textDirection: TextDirection.rtl,
+      isDismissible: true,
+    );
+    pr.style(
+      message:'Espera un momento mientras procesamos tu informacion',
+      borderRadius: 10.0,
+      backgroundColor: Colors.white,
+      elevation: 10.0,
+      insetAnimCurve: Curves.easeInOut,
+      progress: 0.0,
+      progressWidgetAlignment: Alignment.center,
+      maxProgress: 100.0,
+      progressTextStyle: TextStyle(color: Colors.orange, fontSize: 13.0, fontWeight: FontWeight.w400),
+      messageTextStyle: TextStyle(color: Colors.orange, fontSize: 19.0, fontWeight: FontWeight.w600),
+    );
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Confirma enviar esta foto VU?'),
@@ -354,14 +377,15 @@ class DisplayPictureScreen extends StatelessWidget {
           // Agrega un callback onPressed
           onPressed: () async {
             // Toma la foto en un bloque de try / catch. Si algo sale mal,
-
+            //_progressBarActive == true?const CircularProgressIndicator():new Container();
+            await pr.show();
             String fotofrontal=_obtenerBase64(imagePath);
-
+          String usuario="pin09";
             /* Logica de VU**/
             String _ip = '192.168.0.255';
             /*Creaccion de New Operacion...................*/
             final reqOpe = newOperationRequest(
-                userName: "operatorKruger",
+                userName:usuario,
                 ipAddress: _ip,
                 deviceHash: "hash",
                 rooted: false,
@@ -400,7 +424,7 @@ class DisplayPictureScreen extends StatelessWidget {
             /*Creaccion de New Front...................*/
             final resfront = addFrontRequest(
               operationId: idOperacion.toString(),
-              userName: "operatorKruger",
+              userName: usuario,
               analyzeOcr: true,
               analyzeAnomalies: true,
               file: fotofrontal,
@@ -428,14 +452,18 @@ class DisplayPictureScreen extends StatelessWidget {
               }else{
                  print('Error en capturar el front');
               }
-
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>CreateUserBack(camerasdescripcion: listadocamara,idOperacion:idOperacion)));
+              pr.hide().whenComplete((){
+                Navigator.push(context, MaterialPageRoute(builder: (context) =>
+                    CreateUserBack(camerasdescripcion: listadocamara,
+                        idOperacion: idOperacion)));
+              });
 
             });
+          },
 
 
+      ),
 
-          }),
     );
   }
 

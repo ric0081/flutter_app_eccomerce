@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
+@JsonSerializable()
 class loginRequest {
   String applicationVersion;
   String operativeSystemVersion;
@@ -7,7 +8,7 @@ class loginRequest {
   String deviceManufacture;
   String deviceName;
   String userName;
-  List<SelfieListK> selfieList;
+  List<SelfieList> selfieList;
 
   loginRequest(
       {this.applicationVersion,
@@ -26,9 +27,9 @@ class loginRequest {
     deviceName = json['deviceName'];
     userName = json['userName'];
     if (json['selfieList'] != null) {
-      selfieList = new List<SelfieListK>();
+      selfieList = new List<SelfieList>();
       json['selfieList'].forEach((v) {
-        selfieList.add(new SelfieListK.fromJson(v));
+        selfieList.add(new SelfieList.fromJson(v));
       });
     }
   }
@@ -48,13 +49,13 @@ class loginRequest {
   }
 }
 
-class SelfieListK {
+class SelfieList {
   String file;
   String imageType;
 
-  SelfieListK({this.file, this.imageType});
+  SelfieList({this.file, this.imageType});
 
-  SelfieListK.fromJson(Map<String, dynamic> json) {
+  SelfieList.fromJson(Map<String, dynamic> json) {
     file = json['file'];
     imageType = json['imageType'];
   }

@@ -45,11 +45,12 @@ dependencies:
   image: ^ 2.1.12
   png_hide: ^0.0.2
   native_device_orientation: ^0.3.0
-
+  progress_dialog: ^1.2.0
   #####Galery
   google_fonts: ^1.0.0
   animations: ^1.1.2
-
+# barcode
+  #barcode_scan: ^0.0.8
 
 #flutter_icons:
 #  #  image_path: "assets/images/icon-128x128.png"

@@ -5,17 +5,8 @@ import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:camera/camera.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:ffi/ffi.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_app_eccomerce/models/rest/Register.dart';
-import 'package:flutter_app_eccomerce/models/rest/addFrontRequest.dart';
-import 'package:flutter_app_eccomerce/models/rest/addFrontResponse.dart';
-import 'package:flutter_app_eccomerce/models/rest/endOperationRequest.dart';
 import 'package:flutter_app_eccomerce/models/rest/loginRequest.dart';
-import 'package:flutter_app_eccomerce/models/rest/registerRequest.dart';
-import 'package:flutter_app_eccomerce/models/rest/selfieRequest.dart';
 import 'package:flutter_app_eccomerce/pages/home.dart';
 import 'package:flutter_app_eccomerce/pages/widgetCamaraBack.dart';
 import 'package:flutter_app_eccomerce/services/VuOperations.dart';
@@ -25,13 +16,7 @@ import 'dart:io';
 
 import 'package:path/path.dart' show join;
 import 'package:path_provider/path_provider.dart';
-import '../Login.dart';
-import 'createUserBack.dart';
-import 'image_converter.dart';
 
-
-import 'package:flutter_app_eccomerce/models/rest/newOperationRequest.dart';
-import 'package:flutter_app_eccomerce/models/rest/newOperationResponse.dart';
 
 BuildContext globalContext; // Declare global variable to store context from StatelessWidget
 
@@ -341,8 +326,6 @@ class DisplayPictureScreen extends StatelessWidget {
   }) : super(key: key);
 
   VuOperations get operationService => GetIt.I<VuOperations>();
-  newOperationResponse opeResp;
-  addFrontResponse addFrontResp;
 
   @override
   Widget build(BuildContext context) {
@@ -375,9 +358,12 @@ class DisplayPictureScreen extends StatelessWidget {
 
             String fotofrontal=_obtenerBase64(imagePath);
             /* Logica de VU**/
-            SelfieListK a =  SelfieListK( file:fotofrontal, imageType:"SN" );
+            SelfieList a =  SelfieList(
+                file:fotofrontal,
+                imageType:"SN"
+            );
             //selfieList self;
-            List<SelfieListK > self = List<SelfieListK>();
+            List<SelfieList > self = List<SelfieList>();
             self.add(a);
             //print(operationId);
             /*Creaccion de New Operacion...................*/
@@ -393,18 +379,23 @@ class DisplayPictureScreen extends StatelessWidget {
                 operationSystem:"Postman",
                 deviceManufacture: "Postman Inc.",
                 deviceName:"Laptop_AVC",
-                userName:"operatorkruger",
+                userName:"pin07",
                 selfieList: self,
             );
             final resultOperacion = await operationService.Login(reqOpe)
                // .timeout(const Duration(seconds: 60))
                 .then((response) {
-              /*setState(() {
+                  /*setState(() {
 
               })*/
-              ;
+              if(response.data!=null){
+                print(response.data.message);
+                print(response.data.code);
+              }
               if (response.error) {
                 //errorMessage = response.errorMessage ?? 'An error occurred';
+                print(response.errorMessage);
+                print(response.error);
                 print("Error en registrar Selfie ");
               }
 //              opeResp = response.data;

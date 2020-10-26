@@ -9,20 +9,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app_eccomerce/models/rest/addBackRequest.dart';
 import 'package:flutter_app_eccomerce/models/rest/addBackResponse.dart';
-import 'package:flutter_app_eccomerce/models/rest/addFrontRequest.dart';
-import 'package:flutter_app_eccomerce/models/rest/addFrontResponse.dart';
+import 'package:flutter_app_eccomerce/models/rest/addBarcodeRequest.dart';
 import 'package:flutter_app_eccomerce/pages/pruebaVida.dart';
 import 'package:flutter_app_eccomerce/services/VuOperations.dart';
 import 'package:get_it/get_it.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:native_device_orientation/native_device_orientation.dart';
-import 'package:png_hide/png_encoder.dart';
 import 'package:image/image.dart' as ImageProcess;
+import 'package:progress_dialog/progress_dialog.dart';
 
 import 'camera_screen.dart';
-
 import 'dart:async';
-import 'dart:io';
+import 'dart:io' as Io;
 
 import 'package:path/path.dart' show join;
 import 'package:path_provider/path_provider.dart';
@@ -187,9 +183,6 @@ class _widgetCamaraBackState extends State<widgetCamaraBack>
         title: Text("Tomar Foto Back Documento"),
         elevation: 0.7,
       ),
-
-
-
       body:
       Center(
         child:Container (
@@ -320,6 +313,9 @@ class _widgetCamaraBackState extends State<widgetCamaraBack>
 
 class DisplayPictureScreen extends StatelessWidget {
 //  imglib.Image imagePath;
+
+
+
   var imagePath;
   int operationId;
   List<CameraDescription> camerasdescripcion;
@@ -330,6 +326,29 @@ class DisplayPictureScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ProgressDialog pr;
+    bool _progressBarActive = true;
+    // Custom body test
+    pr = ProgressDialog(
+      context,
+      type: ProgressDialogType.Download,
+      textDirection: TextDirection.rtl,
+      isDismissible: true,
+    );
+    pr.style(
+      message:'Espera un momento mientras procesamos tu informacion',
+      borderRadius: 10.0,
+      backgroundColor: Colors.white,
+      elevation: 10.0,
+      insetAnimCurve: Curves.easeInOut,
+      progress: 0.0,
+      progressWidgetAlignment: Alignment.center,
+      maxProgress: 100.0,
+      progressTextStyle: TextStyle(color: Colors.orange, fontSize: 13.0, fontWeight: FontWeight.w400),
+      messageTextStyle: TextStyle(color: Colors.orange, fontSize: 19.0, fontWeight: FontWeight.w600),
+    );
+
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Confirma enviar esta foto VU?'),
@@ -345,7 +364,7 @@ class DisplayPictureScreen extends StatelessWidget {
             //mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               //   Image.memory(imglib.encodeJpg(imagePath)),
-              Image.file(File(imagePath)),
+              Image.file(Io.File(imagePath)),
             ],),),),
       //   Image.file(File(imagePath)),
 
@@ -354,16 +373,19 @@ class DisplayPictureScreen extends StatelessWidget {
           child: Icon(Icons.arrow_forward_ios),
           // Agrega un callback onPressed
           onPressed: () async {
+            await pr.show();
             // Toma la foto en un bloque de try / catch. Si algo sale mal,
             print("IdOperacion----");
             print(this.operationId);
+            String username= "pin09";
+
             String fotobak=_obtenerBase64(imagePath);
             /* Logica de VU**/
             String _ip = '192.168.0.255';
             /*Creaccion de New Operacion...................*/
             final reqOpe = addBackRequest(
               operationId: operationId.toString(),
-              userName: "operatorKruger",
+              userName: username,
               analyzeOcr: true,
               analyzeAnomalies: true,
               file: fotobak,
@@ -381,14 +403,61 @@ class DisplayPictureScreen extends StatelessWidget {
                 print("Error en cargar imagen back");
               }
               opeResp = response.data;
+
+
+
+
+              Address adre= Address(
+                  street: "firstName",
+                  city: "lastName",
+                  state: "number",
+                  zipCode: "birthdate",
+                  country: "gender"
+              );
+
+              DocumentIN documentoNA= DocumentIN(
+                  dateOfIssue: "01-01-2000",
+                  dateOfExpiry: "01-01-2000",
+                  address: adre
+              );
+
+              Data data= Data(
+                    code:0,
+                    message:"Barcode",
+                    document: documentoNA
+              );
+
+              Document documento= Document(
+                  names: "Ricardo Andres",
+                  lastNames: "Eneque Llenque",
+
+                  number: "949208775",
+                  birthdate: "24-02-1991",
+                  gender: "M"
+              );
+
+              print("Entro en el barcode");
+              final reqOpe2 = addBarcodeRequest(
+                operationId: operationId.toString(),
+                userName: username,
+                document: documento,
+                data: data
+              );
+
+                final resultOperacion2 = operationService.addBarcode(reqOpe2).then((response) {
+                ;
+                if (response.error) {
+                  //errorMessage = response.errorMessage ?? 'An error occurred';
+                  print("Error en cargar informacion de barcode");
+                }
+                print("Paso barcode");
+              });
             }
             );
-            print("-----Se creo Nueva Operacion-------");
-            print("IdOperacion----");
 
-            Navigator.push(context, MaterialPageRoute(builder: (context)=>PruebaVida(camerasdescripcion: this.camerasdescripcion ,idOperacion: this.operationId)));
-
-
+            pr.hide().whenComplete((){
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>PruebaVida(camerasdescripcion: this.camerasdescripcion ,idOperacion: this.operationId)));
+            });
 
             /*  int idOperacion = opeResp.operationId;
 
@@ -441,8 +510,6 @@ class DisplayPictureScreen extends StatelessWidget {
           }),
     );
   }
-
-
 }
 
 
@@ -454,7 +521,7 @@ _obtenerBase64(imagenreal) {
   // String decodedFile = utf8.decode(base64.decode(imagenreal));
   // print('decoded file: $decodedFile');
       ;
-  File file = File(imagenreal);
+  Io.File file = Io.File(imagenreal);
   Uint8List bytes = file.readAsBytesSync();
   img64 = base64Encode(bytes);
 

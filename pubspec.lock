@@ -70,7 +70,7 @@ packages:
       name: camera
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.5.8+9"
+    version: "0.5.8+11"
   camera_camera:
     dependency: "direct main"
     description:
@@ -414,7 +414,7 @@ packages:
       name: path_provider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.6.21"
+    version: "1.6.22"
   path_provider_linux:
     dependency: transitive
     description:
@@ -485,6 +485,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.13"
+  progress_dialog:
+    dependency: "direct main"
+    description:
+      name: progress_dialog
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.2.4"
   provider:
     dependency: "direct main"
     description:
